@@ -65,6 +65,18 @@ pipeline {
                 sh "./deploy.sh test $TAG_NAME"
             }
         }   
+        
+        stage("End to End Tests") {
+            when {
+                branch 'master'
+            }
+            agent any
+            steps {
+                sh "chmod +x ui-tests.sh"
+                sh "./ui-tests.sh"
+            }
+        }
+
 
     }
 }
